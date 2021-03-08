@@ -1,8 +1,6 @@
 package br.com.yagovcb.conta_corrente.model;
 
-import br.com.yagovcb.conta_corrente.service.ContaCorrenteService;
 import lombok.*;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 

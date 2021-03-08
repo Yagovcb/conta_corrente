@@ -1,7 +1,6 @@
 package br.com.yagovcb.conta_corrente.model;
 
 import lombok.*;
-
 import javax.persistence.*;
 
 @Entity
