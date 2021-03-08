@@ -6,6 +6,8 @@ import br.com.yagovcb.conta_corrente.service.dto.ContaCorrenteDTO;
 import br.com.yagovcb.conta_corrente.service.dto.TransacaoDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,9 +22,9 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/conta_corrente")
-@Api(value="API REST Conta Corrente")
-@CrossOrigin(origins = "*")
+@AllArgsConstructor
+@RequestMapping("/api")
+@Api(value = "Conta Corrente")
 public class ContaCorrenteController {
 
     @Autowired
@@ -36,7 +38,7 @@ public class ContaCorrenteController {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new Cliente, or with status {@code 400 (Bad Request)} if the Cliente has already an ID
      */
     @Valid
-    @ApiOperation(value = "Cria um novo objeto do tipo Cliente")
+    @ApiOperation(value = "Cadastro de cliente")
     @PostMapping("/cad_cliente")
     public ResponseEntity<ClienteDTO> createCliente(@RequestBody ClienteDTO cliente){
         log.debug("REST request to save Cliente : {}", cliente);
@@ -51,7 +53,6 @@ public class ContaCorrenteController {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new Cliente, or with status {@code 400 (Bad Request)} if the Cliente has already an ID
      */
     @Valid
-    @ApiOperation(value = "Atualiza um objeto do tipo Cliente")
     @PutMapping("/atualiza_cliente")
     public ResponseEntity<ClienteDTO> updateCliente(@RequestBody ClienteDTO cliente){
         log.debug("REST request to update Cliente : {}", cliente);
@@ -66,7 +67,6 @@ public class ContaCorrenteController {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new TransacaoDTO, or with status {@code 400 (Bad Request)} if the TransacaoDTO has already an ID
      */
     @Valid
-    @ApiOperation(value = "Realiza um saque do valor da conta corrente")
     @PutMapping("/sacar")
     public ResponseEntity<TransacaoDTO> sacar(@RequestBody TransacaoDTO transacaoDTO) throws Exception {
         log.debug("REST request to save Transacao : {}", transacaoDTO);
@@ -81,7 +81,6 @@ public class ContaCorrenteController {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new TransacaoDTO, or with status {@code 400 (Bad Request)} if the TransacaoDTO has already an ID
      */
     @Valid
-    @ApiOperation(value = "Realiza um deposito na Conta Corrente")
     @PutMapping("/depositar")
     public ResponseEntity<TransacaoDTO> depositar(@RequestBody TransacaoDTO transacaoDTO) {
         log.debug("REST request to save Transacao : {}", transacaoDTO);
@@ -95,7 +94,6 @@ public class ContaCorrenteController {
      * @param id the ContaCorrenteDTO to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new TransacaoDTO, or with status {@code 400 (Bad Request)} if the TransacaoDTO has already an ID
      */
-    @ApiOperation(value = "Retorna um valor do Saldo da Conta Corrente")
     @GetMapping("/{id}")
     public ResponseEntity<ContaCorrenteDTO> getSaldo(@PathVariable Long id) {
         log.debug("REST request to get Premio : {}", id);
@@ -110,7 +108,6 @@ public class ContaCorrenteController {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new TransacaoDTO, or with status {@code 400 (Bad Request)} if the TransacaoDTO has already an ID
      */
     @GetMapping("/transacao/{id}")
-    @ApiOperation(value = "Retorna uma lista de Transações da Conta Corrente")
     public ResponseEntity<List<TransacaoDTO>> getExtrato(@PathVariable Long id ) {
         log.debug("REST request to get Premio : {}", id);
         List<TransacaoDTO> transacoes = service.buscaTransacoesPorContaCorrente(id);
