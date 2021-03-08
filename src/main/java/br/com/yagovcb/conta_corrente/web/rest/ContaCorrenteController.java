@@ -4,31 +4,22 @@ import br.com.yagovcb.conta_corrente.service.ContaCorrenteService;
 import br.com.yagovcb.conta_corrente.service.dto.ClienteDTO;
 import br.com.yagovcb.conta_corrente.service.dto.ContaCorrenteDTO;
 import br.com.yagovcb.conta_corrente.service.dto.TransacaoDTO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import lombok.AllArgsConstructor;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 @Slf4j
-@AllArgsConstructor
 @RequestMapping("/api")
-@Api(value = "Conta Corrente")
 public class ContaCorrenteController {
 
     @Autowired
-    private ContaCorrenteService service;
+    public ContaCorrenteService service;
 
 
     /**
@@ -38,7 +29,6 @@ public class ContaCorrenteController {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new Cliente, or with status {@code 400 (Bad Request)} if the Cliente has already an ID
      */
     @Valid
-    @ApiOperation(value = "Cadastro de cliente")
     @PostMapping("/cad_cliente")
     public ResponseEntity<ClienteDTO> createCliente(@RequestBody ClienteDTO cliente){
         log.debug("REST request to save Cliente : {}", cliente);
@@ -115,3 +105,4 @@ public class ContaCorrenteController {
     }
 
 }
+
